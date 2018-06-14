@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>大屏幕</title>
+    <script src="js/echarts.js"></script>
+    <link rel="stylesheet" href="css/index.css">
+</head>
+<body>
+
+<div id="map"></div>
+<canvas id="canvas"></canvas>
+<div class="container" id="app">
+    <div class="zhy-tit">
+        <div class="zhy-tit-l">
+            <span id="zhy-time">{{date}} {{day}} {{time}}</span>
+            <span class="zhy-ref" @click="refresh"></span>
+        </div>
+        <div class="zhy-tit-m">
+            重庆市车辆实时动态检测
+        </div>
+        <div class="zhy-tit-r flex-box">
+            <div class="zhy-loc zhy-tit-r1 flex-box flex" @click="isAreaList=true">
+                <div class="zhy-loc1">
+                    <span class="zhy-border" v-text="area.name"></span>
+                </div>
+                <div class="zhy-loc2 flex"></div>
+            </div>
+            <div class="zhy-sel" v-show="isAreaList">
+                <ul>
+                    <li v-for="item in areaList" @click="checkArea(item)">{{item.name}}</li>
+                </ul>
+            </div>
+            <div class="zhy-tem zhy-tit-r1 flex">
+                {{weather}}
+            </div>
+        </div>
+    </div>
+    <div class="zhy-zone1" v-show="isZone1">
+        <div class="zhy-z1-t flex-box">
+            <div class="z1-time flex-box">
+                <span class="z1-time1"></span>
+                <span class="z1-time2">00:{{count | filterCount}}</span>
+            </div>
+            <div class="z1-number">
+                <span>实时点火:</span>
+                <span>{{fireNum}}</span>
+            </div>
+            <div>
+                <img src="img/ico4.png" alt="" class="z1-del" @click="isZone1=false">
+            </div>
+
+        </div>
+        <div class="zhy-z1-b flex-box">
+            <div class="flex">
+                <p>累计行驶时长</p>
+                <div class="z1-b-c flex-box">
+                    <span class="zhy-wrap">{{duration}}</span>
+                    <span>小时</span>
+                </div>
+            </div>
+            <div class="flex">
+                <p>累计行驶里程</p>
+                <div class="z1-b-c flex-box">
+                    <span class="zhy-wrap">{{mileage}}</span>
+                    <span>公里</span>
+                </div>
+            </div>
+            <div class="flex">
+                <p>累计车辆耗油量</p>
+                <div class="z1-b-c flex-box">
+                    <span class="zhy-wrap">{{fuel}}</span>
+                    <span>升</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="zhy-zone2 flex-box">
+        <div class="flex"  v-show="isZone2">
+            <img src="img/ico4.png" alt="" class="z2-del" @click="isZone2=false">
+            <div class="zhy-chart" id="zhy-z2-cha1" ></div>
+        </div>
+        <div class="flex" v-show="isZone3">
+            <div>
+                <img src="img/ico4.png" alt="" class="z2-del" @click="isZone3=false">
+                <div class="zhy-chart" id="zhy-z2-cha2"></div>
+            </div>
+        </div>
+    </div>
+    <div class="zhy-zone3">
+        <div class="item" v-show="isZone4">
+            <img src="img/ico4.png" alt="" class="z3-del" @click="isZone4=false">
+            <div class="zhy-chart" id="zhy-z3-cha1"></div>
+        </div>
+        <div class="item" v-show="isZone5">
+            <img src="img/ico4.png" alt="" class="z3-del" @click="isZone5=false">
+            <div class="zhy-chart" id="zhy-z3-cha2"></div>
+        </div>
+        <div class="item" v-show="isZone6">
+            <img src="img/ico4.png" alt="" class="z3-del" @click="isZone6=false">
+            <div class="zhy-chart" id="zhy-z3-cha3"></div>
+        </div>
+    </div>
+</div>
+
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./services/api.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
+<script type="text/javascript" src="js/mapv.min.js"></script>
+<script type="text/javascript" src="js/map.style.js"></script>
+<script type="text/javascript" src="js/util.js"></script>
+<script src="./js/index.js"></script>
+
+</body>
+</html>

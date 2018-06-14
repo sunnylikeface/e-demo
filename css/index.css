@@ -1,0 +1,268 @@
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+ul,li{
+    margin:0;
+    padding:0;
+    list-style-type: none;
+}
+p{
+    margin: 0;
+    padding: 0;
+}
+.flex-box{
+    display:flex;
+    display:-webkit-flex;
+}
+.flex{
+    flex:1;
+    -webkit-flex: 1;
+}
+.hide{
+    display:none;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+
+.zhy-wrap{
+    width: 52px;
+    display:block;
+    word-break: break-all;
+    word-wrap: break-word;
+}
+
+/*title*/
+.zhy-tit{
+    width: 100%;
+    height: 80px;
+    position:absolute;
+    top:0;
+    z-index:2;
+}
+.zhy-tit-l {
+    position: absolute;
+    height: 52px;
+    width: 405px;
+    line-height: 52px;
+    font-size: 23px;
+    color: #fff;
+    background: url(../img/p1.png) no-repeat;
+    background-size: cover;
+    top: 20px;
+    left: 50px;
+}
+.zhy-tit-l #zhy-time{
+    display: inline-block;
+    height: 52px;
+    margin-left: 20px;
+}
+.zhy-ref{
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    background: url(../img/ico1.png) no-repeat center center;
+    cursor:pointer;
+    position: absolute;
+    right: 10px;
+}
+
+
+.zhy-tit-m{
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 720px;
+    font-size: 40px;
+    color:#fff;
+    text-align:center;
+    height:75px;
+    line-height:75px;
+    background: url(../img/p2.png) no-repeat center;
+}
+
+.zhy-tit-r{
+    width: 450px;
+    justify-content:center;
+    align-items: center;
+    position: absolute;
+    top: 20px;
+    right: 50px;
+}
+.zhy-tit-r1{
+    height:53px;
+    line-height:53px;
+    font-size: 23px;
+    color:#fff;
+    width:210px;
+    background: url(../img/p3.png) no-repeat center;
+    background-size: cover;
+}
+.zhy-loc1{
+    flex:3;
+    text-align: center;
+    position: relative;
+}
+.zhy-border{
+    display: inline-block;
+    width:162px;
+    height:40px;
+    line-height: 40px;
+    border-right:2px solid rgb(47,100,163);
+    position: absolute;
+    left:0;
+    top:6px;
+}
+.zhy-loc2{
+    background: url(../img/ico2.png) no-repeat center;
+    background-size: 11px 7px;
+    cursor: pointer;
+}
+.zhy-sel{
+    font-size: 23px;
+    color:#fff;
+    position:absolute;
+    left: 2px;
+    top: 50px;
+    text-align: center;
+    border: 1px solid #33bef2;
+}
+.zhy-sel li{
+    display: block;
+    height:53px;
+    width:212px;
+    line-height:53px;
+    background: rgba(20,55,112,.7);
+    cursor:pointer;
+}
+.zhy-sel li:hover{
+    background: rgba(51,190,242,.7);
+}
+.zhy-tem{
+    margin-left:15px;
+    text-align: center;
+}
+
+
+/*zone1*/
+.zhy-zone1{
+    position:absolute;
+    top:100px;
+    left:20px;
+    z-index:2;
+    width:480px;
+    height:260px;
+    background:url(../img/p4.png) no-repeat center;
+    background-size: cover;
+}
+.zhy-z1-t{
+    margin:15px auto;
+    height:72px;
+    width:450px;
+    line-height: 72px;
+    font-size: 23px;
+    color:#fff;
+    background: url(../img/p5.png) no-repeat bottom;
+    justify-content: space-around;
+}
+.z1-time{
+    justify-content:center;
+}
+.z1-time1{
+    display: inline-block;
+    width:40px;
+    background: url(../img/ico3.png) no-repeat center;
+}
+.z1-time2{
+    display: inline-block;
+    width: 80px;
+    text-align: center;
+}
+.z1-del{
+    position: absolute;
+    cursor: pointer;
+    z-index:9;
+    top:25px;
+    right:28px;
+}
+
+.zhy-z1-b{
+    width:445px;
+    margin:0 auto;
+    font-size: 16px;
+    color:#fff;
+    text-align: center;
+}
+.z1-b-c{
+    font-size: 12px;
+    color: #30cfef;
+    width: 94px;
+    height: 95px;
+    background: url(../img/p6.png) no-repeat center;
+    margin:10px auto;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+
+/*zone2*/
+.zhy-zone2{
+    position:absolute;
+    bottom:50px;
+    left:20px;
+    height: 300px;
+}
+.zhy-zone2 .flex{
+    width: 555px;
+    height: 350px;
+    position: relative;
+    background: url(../img/p4.png) no-repeat center;
+    background-size: 100% 100%;
+}
+.zhy-zone2 .zhy-chart {
+    width: 555px;
+    height: 350px;
+}
+.z2-del{
+    cursor:pointer;
+    position: absolute;
+    top:35px;
+    right:32px;
+    z-index:9;
+}
+
+/*zone3*/
+.zhy-zone3{
+    position:absolute;
+    top: 115px;
+    right: 20px;
+    width: 530px;
+    min-height: 900px;
+}
+.zhy-zone3 .item{
+    position: relative;
+    height: 300px;
+}
+.zhy-zone3 .item .zhy-chart{
+    background: url(../img/p4.png) no-repeat center;
+}
+.zhy-zone3 .zhy-chart {
+    width: 530px;
+    height: 300px;
+}
+.z3-del{
+    cursor:pointer;
+    position: absolute;
+    top:28px;
+    right:18px;
+    z-index:9;
+}
+
+

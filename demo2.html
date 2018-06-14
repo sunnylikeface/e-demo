@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <style type="text/css">
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        #time {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            color: #fff;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+<div id="map"></div>
+<canvas id="canvas"></canvas>
+<div id="time"></div>
+
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=1XjLLEhZhQNUzd93EjU5nOGQ"></script>
+<script type="text/javascript" src="/js/mapv.min.js"></script>
+
+<script type="text/javascript">
+
+
+
+    var data = [{"id":1,"openCarId":"07e70319a4ab44d1f004f21ad389cd0b","areaId":1,"longitude":106.49504173900777,"latitude":29.558101912126922,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 10:52:48","updateTimestamp":"2018-06-07 17:13:54"},{"id":2,"openCarId":"5300d7eceb9eabb6458a239a7b70a9d5","areaId":1,"longitude":106.55384407642805,"latitude":29.57219926619833,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 13:55:26","updateTimestamp":"2018-06-07 17:10:18"},{"id":17,"openCarId":"1b0495e53452c9d177cf1a5e81e893c5","areaId":1,"longitude":106.49802098608049,"latitude":29.558326280716095,"heading":72.8,"accStatus":1,"insertTimestamp":"2018-06-06 17:34:07","updateTimestamp":"2018-06-07 17:06:13"},{"id":33,"openCarId":"76002d5dd545bc731074a6b53088a411","areaId":1,"longitude":106.5531508281805,"latitude":29.571801489416288,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 17:35:32","updateTimestamp":"2018-06-07 17:10:20"},{"id":34,"openCarId":"cd341c35723a78bab551cdd4eb0e81a1","areaId":1,"longitude":106.54978510037395,"latitude":29.568765998728637,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 17:37:39","updateTimestamp":"2018-06-07 17:10:20"},{"id":35,"openCarId":"b21550ddcc8d9de213910dedace8b43c","areaId":1,"longitude":106.54974649857446,"latitude":29.568453536042213,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 17:38:05","updateTimestamp":"2018-06-07 17:10:18"},{"id":91,"openCarId":"55f29fb6968f7273bfaa3cdc85dc91fd","areaId":1,"longitude":106.49290679731708,"latitude":29.55838001688306,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 10:52:48","updateTimestamp":"2018-06-07 17:13:53"},{"id":92,"openCarId":"3d0a726b2bb9cf77c7a57b394e1e64ac","areaId":1,"longitude":106.54991220204151,"latitude":29.56905037722034,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 10:52:48","updateTimestamp":"2018-06-07 17:10:19"},{"id":93,"openCarId":"ac94d2c0da3ee3175c8d57bc9641c7e9","areaId":1,"longitude":106.54974649857446,"latitude":29.568453536042213,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 10:52:48","updateTimestamp":"2018-06-07 17:10:19"},{"id":94,"openCarId":"83e69dbdf57beafb80ef0a38a8daacd1","areaId":1,"longitude":106.55613093101218,"latitude":29.572877913518596,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-06 10:52:48","updateTimestamp":"2018-06-07 17:10:19"},{"id":380,"openCarId":"a7fde0b4952de986bb985414be2cd144","areaId":1,"longitude":106.55129065118662,"latitude":29.570333409640728,"heading":74.4,"accStatus":1,"insertTimestamp":"2018-06-07 15:58:05","updateTimestamp":"2018-06-07 17:10:18"}];
+
+
+  var _dataSet = [], map, layer;
+  var options = {
+        fillStyle: 'rgba(255, 250, 50, 0.6)',
+        size: 3,
+        draw: 'simple',
+        animation: {
+            type: 'time',
+            stepsRange: {
+                start: 0,
+                end: 10
+            },
+            trails: 1,
+            duration: 1,
+        }
+    }
+
+  function drawMap() {
+      var _data = [];
+      for(var i = 0; i < data.length; i++){
+          var item = data[i];
+          _data.push({
+              geometry: {
+                  type: 'Point',
+                  coordinates: [ item.longitude, item.latitude]
+              },
+              time: Math.random() * 10
+          });
+      }
+     _dataSet.set(_data)
+  }
+
+  function drawMap2() {
+      var _data = [];
+      for(var i = 0; i < data.length; i++){
+          var item = data[i];
+          _data.push({
+              geometry: {
+                  type: 'Point',
+                  coordinates: [ item.longitude, item.latitude]
+              },
+              time: Math.random() * 10
+          });
+      }
+      // _dataSet.set(_data)
+      // _dataSet = new mapv.DataSet(_data);
+      // layer.set(_dataSet)
+      map.clearOverlays(layer);
+      layer = new mapv.baiduMapLayer(map, _dataSet, options);
+      // _dataSet.set(_data)
+  }
+
+  function init() {
+      // 百度地图API功能
+      map = new BMap.Map("map", {
+          enableMapClick: false
+      });    // 创建Map实例
+      map.centerAndZoom(new BMap.Point(106.53, 29.52), 10);  // 初始化地图,设置中心点坐标和地图级别
+      map.enableScrollWheelZoom(true); // 开启鼠标滚轮缩放
+
+      // 地图自定义样式
+      map.setMapStyle({
+          styleJson: [{
+              "featureType": "water",
+              "elementType": "all",
+              "stylers": {
+                  "color": "#044161"
+              }
+          }, {
+              "featureType": "land",
+              "elementType": "all",
+              "stylers": {
+                  "color": "#091934"
+              }
+          }, {
+              "featureType": "boundary",
+              "elementType": "geometry",
+              "stylers": {
+                  "color": "#064f85"
+              }
+          }, {
+              "featureType": "railway",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "highway",
+              "elementType": "geometry",
+              "stylers": {
+                  "color": "#004981"
+              }
+          }, {
+              "featureType": "highway",
+              "elementType": "geometry.fill",
+              "stylers": {
+                  "color": "#005b96",
+                  "lightness": 1
+              }
+          }, {
+              "featureType": "highway",
+              "elementType": "labels",
+              "stylers": {
+                  "visibility": "on"
+              }
+          }, {
+              "featureType": "arterial",
+              "elementType": "geometry",
+              "stylers": {
+                  "color": "#004981",
+                  "lightness": -39
+              }
+          }, {
+              "featureType": "arterial",
+              "elementType": "geometry.fill",
+              "stylers": {
+                  "color": "#00508b"
+              }
+          }, {
+              "featureType": "poi",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "green",
+              "elementType": "all",
+              "stylers": {
+                  "color": "#056197",
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "subway",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "manmade",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "local",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "arterial",
+              "elementType": "labels",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "boundary",
+              "elementType": "geometry.fill",
+              "stylers": {
+                  "color": "#029fd4"
+              }
+          }, {
+              "featureType": "building",
+              "elementType": "all",
+              "stylers": {
+                  "color": "#1a5787"
+              }
+          }, {
+              "featureType": "label",
+              "elementType": "all",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }, {
+              "featureType": "poi",
+              "elementType": "labels.text.fill",
+              "stylers": {
+                  "color": "#ffffff"
+              }
+          }, {
+              "featureType": "poi",
+              "elementType": "labels.text.stroke",
+              "stylers": {
+                  "color": "#1e1c1c"
+              }
+          }, {
+              "featureType": "administrative",
+              "elementType": "labels",
+              "stylers": {
+                  "visibility": "on"
+              }
+          },{
+              "featureType": "road",
+              "elementType": "labels",
+              "stylers": {
+                  "visibility": "off"
+              }
+          }]
+      });
+
+      var _data = [];
+      for(var i = 0; i < data.length; i++){
+          var item = data[i];
+          _data.push({
+              geometry: {
+                  type: 'Point',
+                  coordinates: [ item.longitude, item.latitude]
+              },
+              time: Math.random() * 10
+          });
+      }
+      // _dataSet.set(_data)
+      _dataSet = new mapv.DataSet(_data);
+
+     layer = new mapv.baiduMapLayer(map, _dataSet, options);
+  }
+    init();
+    // drawMap()
+</script>
+
+</body>
+</html>

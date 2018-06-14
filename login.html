@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0">
+    <link rel="stylesheet" href="css/reset.css" >
+    <link rel="stylesheet" href="css/login.css" >
+</head>
+<body>
+<!--app-->
+<div class="app">
+    <div class="input-group border-1 user">
+        <input type="text" placeholder="请输入用户名" >
+    </div>
+    <div class="input-group border-1 pwd">
+        <input type="text" placeholder="请输入密码" >
+    </div>
+    <div class="err">
+        用户名密码错误，请核对后再登录
+    </div>
+    <div class="btn-group">
+        <div>登录</div>
+    </div>
+</div>
+<!--pc-->
+<div class="pc bg" id="app">
+    <div class="tit">
+        机动车安全联网监管平台
+    </div>
+    <div class="pc-group">
+        <div class="input-group border-1 user">
+            <input type="text" placeholder="请输入用户名" v-model="loginName">
+        </div>
+        <div class="input-group border-1 pwd">
+            <input type="password" placeholder="请输入密码" v-model="loginPwd">
+        </div>
+        <div class="err" v-text="error"></div>
+        <div class="btn-group">
+            <div @click="login">登录</div>
+        </div>
+    </div>
+</div>
+</body>
+<script src="./js/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./services/api.js"></script>
+<script src="./js/login.js"></script>
+</html>
